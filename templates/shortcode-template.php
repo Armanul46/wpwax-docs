@@ -1,5 +1,11 @@
 <?php
-if($child_cats) {
+if( !empty( $child_cats ) ) {
+    foreach ( $child_cats as $child_cat) { ?>
+        <div class="sidbar-category"><?php echo $child_cat->name; ?></div>
+    <?php
+    }
+
+
 
     foreach ( $child_cats as $child_cat) {
         $options = array(

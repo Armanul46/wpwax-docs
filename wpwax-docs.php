@@ -48,13 +48,24 @@ final class BD_Docs
 
             add_action('init', array(self::$instance, 'register_custom_post_type'));
             add_action('init', array(self::$instance, 'add_custom_taxonomy'));
-
+            add_filter('the_content', array(self::$instance, 'the_content'), 20);
             add_shortcode('wpwax_docs',array(self::$instance, 'wpwax_docs'));
             self::$instance->includes();
 
         }
         return self::$instance;
     }
+
+
+    public function the_content( $content ) {
+        if (is_singular('wpwax_docs') && in_the_loop() && is_main_query()) {
+            ob_start();
+            include BDC_TEMPLATES_DIR . '/single-template.php';
+            return ob_get_clean();
+        }
+        return $content;
+    }
+
 
     public function wpwax_docs( $atts ) {
         $params = array(
@@ -65,12 +76,14 @@ final class BD_Docs
         $slug = !empty($atts['type']) ? $atts['type'] : '';
 
         $category = get_term_by('slug', $slug, 'wpwax_docs_category');
-        $child_cats = get_terms([
-            'taxonomy'=> 'wpwax_docs_category',
-            'parent'  => $category->term_taxonomy_id
-        ]);
+        if( !empty( $category ) ) {
+            $child_cats = get_terms([
+                'taxonomy' => 'wpwax_docs_category',
+                'parent' => $category->term_taxonomy_id
+            ]);
+        }
         ob_start();
-        include BDC_TEMPLATES_DIR . '/template.php';
+        include BDC_TEMPLATES_DIR . '/shortcode-template.php';
         return ob_get_clean();
     }
 
