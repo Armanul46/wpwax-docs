@@ -92,10 +92,10 @@ final class BD_Docs
     {
 
         $labels = array(
-            'name' => _x('Directory Docs', 'Plural Name of Directory listing', 'wpwax-docs'),
-            'singular_name' => _x('Directory Docs', 'Singular Name of Directory listing', 'wpwax-docs'),
-            'menu_name' => __('Directory Docs', 'wpwax-docs'),
-            'name_admin_bar' => __('Directory Docs', 'wpwax-docs'),
+            'name' => _x('WpWax Docs', 'Plural Name of WpWax listing', 'wpwax-docs'),
+            'singular_name' => _x('WpWax Docs', 'Singular Name of WpWax listing', 'wpwax-docs'),
+            'menu_name' => __('WpWax Docs', 'wpwax-docs'),
+            'name_admin_bar' => __('WpWax Docs', 'wpwax-docs'),
             'parent_item_colon' => __('Parent Docs listing:', 'wpwax-docs'),
             'all_items' => __('All Docs', 'wpwax-docs'),
             'add_new_item' => __('Add New Doc', 'wpwax-docs'),
@@ -110,8 +110,8 @@ final class BD_Docs
         );
 
         $args = array(
-            'label' => __('Directory Docs', 'wpwax-docs'),
-            'description' => __('Directory Docs', 'wpwax-docs'),
+            'label' => __('WpWax Docs', 'wpwax-docs'),
+            'description' => __('WpWax Docs', 'wpwax-docs'),
             'labels' => $labels,
             'supports' => array('title', 'editor', 'author'),
             //'show_in_rest'         => true,
@@ -152,8 +152,8 @@ final class BD_Docs
         /*CATEGORY*/
 
         $labels = array(
-            'name' => _x('Directory categories', 'Category general name', 'wpwax-docs'),
-            'singular_name' => _x('Directory category', 'Category singular name', 'wpwax-docs'),
+            'name' => _x('WpWax categories', 'Category general name', 'wpwax-docs'),
+            'singular_name' => _x('WpWax category', 'Category singular name', 'wpwax-docs'),
             'search_items' => __('Search category', 'wpwax-docs'),
             'all_items' => __('All categories', 'wpwax-docs'),
             'parent_item' => __('Parent category', 'wpwax-docs'),
@@ -162,7 +162,7 @@ final class BD_Docs
             'update_item' => __('Update category', 'wpwax-docs'),
             'add_new_item' => __('Add New category', 'wpwax-docs'),
             'new_item_name' => __('New category Name', 'wpwax-docs'),
-            'menu_name' => __('Directory Categories', 'wpwax-docs'),
+            'menu_name' => __('WpWax Categories', 'wpwax-docs'),
         );
 
         $args = array(
