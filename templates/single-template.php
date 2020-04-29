@@ -1,7 +1,6 @@
 <?php
 global $post;
 $cats = get_the_terms($post->ID, 'wpwax_docs_category');
-
 $parent_id = $cats[0]->parent;
 
 $all_cats = get_terms( [
@@ -14,7 +13,6 @@ $all_cats = get_terms( [
 
         if( !empty( $all_cats ) ) {
             foreach ( $all_cats as $child_cat) {
-
                 $options = array(
                     'post_type' => 'wpwax_docs',
                     'posts_per_page' => -1,
@@ -28,7 +26,7 @@ $all_cats = get_terms( [
                 );
                 $docs = new WP_Query($options); ?>
                 <div class="left-sidebar">
-                    <h4><?php echo $child_cat->name; ?></h4>
+                    <h4 class="<?php echo ($cats[0]->term_id == $child_cat->term_id ) ? 'active' : ''; ?>"><?php echo $child_cat->name; ?></h4>
                     <?php if($docs->have_posts()) {?>
                         <ul>
                             <?php while ($docs->have_posts()) : $docs->the_post(); ?>
@@ -51,7 +49,7 @@ $all_cats = get_terms( [
         ?>
         <div class="title"> <?php echo get_the_title($post->ID); ?> </div>
         <div class="content">
-            <?php echo $post_content;?>
+            <?php echo $post_content; ?>
         </div>
         <div class="doc-details-excerpt">
             <p class="doc-last-update">
@@ -63,7 +61,7 @@ $all_cats = get_terms( [
                 </span>
             </p>
 
-            <div class="doc-feedback">
+           <!-- <div class="doc-feedback">
                 Was this article helpful?
                 <a href="" class="doc-upvote"><span class="la la-smile-o"></span> Yes</a>
                 <a href="" class="doc-downvote"><span class="la la-frown-o"></span> No</a>
@@ -78,7 +76,7 @@ $all_cats = get_terms( [
                     <a href=""><span class="la la-youtube"></span></a>
                     <a href=""><span class="la la-instagram"></span></a>
                 </p>
-            </div>
+            </div>-->
 
             <!--<div class="doc-pagination">
                 <a href="" class="doc-prev">
@@ -91,7 +89,7 @@ $all_cats = get_terms( [
                 </a>
             </div>-->
             <?php
-            $wpwax_cats = get_the_terms($post, ATBDP_CATEGORY);
+            $wpwax_cats = get_the_terms($post, 'wpwax_docs_category');
             $wpwax_cats_ids = array();
 
             if (!empty($wpwax_cats)) {
@@ -112,10 +110,11 @@ $all_cats = get_terms( [
                 'post__not_in' => array($post->ID),
             );
             $related_docs = new WP_Query($args);
+
             ?>
             <?php if($related_docs->have_posts()) { ?>
             <div class="doc-related-article">
-                <h3>Related Article</h3>
+                <h3><?php _e('Related Article', 'wpwax-docs');?></h3>
                 <ul>
                     <?php while($related_docs->have_posts()) : $related_docs->the_post();?>
                     <li><a href="<?php echo get_the_permalink(); ?>"><span class="la la-file-text"></span> <?php echo get_the_title(); ?></a></li>
@@ -125,7 +124,7 @@ $all_cats = get_terms( [
                 </ul>
             </div>
             <?php } ?>
-            <div class="doc-comments">
+            <!--<div class="doc-comments">
                 <h3>Leave Comment</h3>
                 <form action="/">
                     <div class="form-group">
@@ -141,7 +140,7 @@ $all_cats = get_terms( [
                         <textarea></textarea>
                     </div>
                 </form>
-            </div>
+            </div>-->
         </div>
     </section>
 </div>
