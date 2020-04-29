@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: wpWax Docs
- * Plugin URI: http://aazztech.com/plugins/directorist-map-view
+ * Plugin URI:
  * Description: This is an add-on for Directorist Plugin. You can display business hour by this extension.
  * Version: 1.0
  * Author: AazzTech
  * Author URI: http://aazztech.com
  * License: GPLv2 or later
- * Text Domain: directorist-map-view
+ * Text Domain: wpWax-docs
  * Domain Path: /languages
  */
 
