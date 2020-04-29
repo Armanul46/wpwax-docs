@@ -50,13 +50,20 @@ final class BD_Docs
             add_action('init', array(self::$instance, 'add_custom_taxonomy'));
             add_filter('the_content', array(self::$instance, 'the_content'), 20);
             add_shortcode('wpwax_docs',array(self::$instance, 'wpwax_docs'));
+            add_shortcode( 'wpwax_search_result', array( self::$instance, 'wpwax_search_result') );
             self::$instance->includes();
 
         }
         return self::$instance;
     }
 
+    public function wpwax_search_result () {
 
+        ob_start();
+        include BDC_TEMPLATES_DIR . '/search-template.php';
+        return ob_get_clean();
+
+    }
     public function the_content( $content ) {
         if (is_singular('wpwax_docs') && in_the_loop() && is_main_query()) {
             ob_start();
