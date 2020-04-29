@@ -261,3 +261,40 @@
 .doc-details-excerpt .doc-comments form .form-group:last-child{
     flex: 0 0 100%;
 }
+
+.wpwax-search-result .doc-search-summery{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e3e6ef;
+    padding-bottom: 25px;
+}
+.wpwax-search-result .doc-search-summery p{
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
+    color: #5F6275;
+}
+.wpwax-search-result .doc-search-summery p span{
+    color: #272B41;
+}
+.wpwax-search-result .search-result-docs{
+    display: flex;
+}
+.wpwax-search-result .search-result-docs div{
+    flex: 1;
+}
+.wpwax-search-result .search-result-docs span {
+    padding-top: 3px;
+    margin-right: 15px;
+}
+.wpwax-search-result .search-result-docs div h4{
+    font-size: 20px;
+}
+.wpwax-search-result .search-result-docs div h4 a{
+    color: #272B41;
+}
+.wpwax-search-result .search-result-docs div h4 a:hover{
+    color: #006FFF;
+}
