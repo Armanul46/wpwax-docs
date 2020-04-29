@@ -75,3 +75,189 @@
 .docs-wrapper .docs-contents .atbd-docs-name ul li a:hover{
     color: #5458EE;
 }
+
+.wpwax-single-docs{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -30px;
+}
+.wpwax-single-docs .left-sidebar{
+    margin-bottom: 18px;
+}
+.wpwax-single-docs .left-sidebar h4{
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+}
+.wpwax-single-docs .left-sidebar h4:before{
+    position: absolute;
+    content: '\f112';
+    font-family: "LineAwesome";
+    left: 0;
+    top: 2px;
+    font-size: 11px;
+}
+.wpwax-single-docs .left-sidebar h4.active:before{
+    content: '\f110';
+}
+.wpwax-single-docs .left-sidebar ul{
+    margin: 0 0 0 20px;
+}
+.wpwax-single-docs .left-sidebar ul li{
+    margin-bottom: 15px;
+}
+.wpwax-single-docs .left-sidebar ul li:last-child{
+    margin-bottom: 0;
+}
+.wpwax-single-docs .left-sidebar ul li a{
+    color: #5F6275;
+    font-size: 15px;
+    line-height: 24px;
+    display: block;
+}
+.wpwax-single-docs .left-sidebar ul li a:hover{
+    color: #5458EE;
+}
+.wpwax-left-sidebar{
+    flex: 0 0 35%;
+    padding: 0 30px;
+}
+.wpwax-doc-details{
+    flex: 0 0 65%;
+    padding: 0 30px;
+}
+.doc-details-excerpt{
+    margin-top: 60px;
+}
+.doc-details-excerpt .doc-last-update{
+    font-size: 14px;
+    color: #272B41;
+}
+.doc-details-excerpt .doc-last-update span{
+    color: #272B41;
+}
+.doc-details-excerpt .doc-feedback{
+    border: 1px solid #EAEBEF;
+    box-shadow: 0 5px 10px rgba(146,148,159, .1);
+    text-align: center;
+    padding: 35px;
+    color: #272B41;
+    font-weight: 600;
+    border-radius: 5px;
+}
+.doc-details-excerpt .doc-feedback a{
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 15px;
+    border-radius: 4px;
+}
+.doc-details-excerpt .doc-feedback a.doc-upvote{
+    border: 1px solid #32CC6F;
+    color: #32CC6F;
+    margin-left: 15px;
+}
+.doc-details-excerpt .doc-feedback a.doc-downvote{
+    border: 1px solid #FA8B0C;
+    color: #FA8B0C;
+}
+.doc-details-excerpt .doc-feedback a span{
+    font-size: 20px;
+}
+.doc-details-excerpt .doc-request-share{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.doc-details-excerpt .doc-request-share p:first-child{
+    font-size: 15px;
+    font-weight: 600;
+    color: #272B41;
+}
+.doc-details-excerpt .doc-request-share p:first-child a{
+    color: #006FFF;
+}
+.doc-details-excerpt .doc-request-share p:last-child{
+    color: #92949F;
+    font-size: 14px;
+}
+.doc-details-excerpt .doc-request-share p:last-child a{
+    color: #92949F;
+}
+.doc-details-excerpt .doc-request-share p:last-child a:hover{
+    color: #006FFF;
+}
+
+.doc-details-excerpt .doc-pagination{
+    display: flex;
+    justify-content: space-between;
+}
+.doc-details-excerpt .doc-pagination .doc-prev{
+    text-align: left;
+    font-size: 14px;
+    color: #272B41;
+}
+.doc-details-excerpt .doc-pagination .doc-prev span{
+    display: block;
+    font-size: 13px;
+    color: #92949f;
+}
+.doc-details-excerpt .doc-pagination .doc-next{
+    text-align: right;
+    font-size: 14px;
+    color: #272B41;
+}
+.doc-details-excerpt .doc-pagination .doc-next span{
+    display: block;
+    font-size: 13px;
+    color: #92949f;
+}
+.doc-details-excerpt .doc-related-article{
+    border: 1px solid #EAEBEF;
+    padding: 30px;
+    border-radius: 5px;
+    margin-top: 70px;
+}
+.doc-details-excerpt .doc-related-article h3{
+    font-size: 20px;
+    color: #272B41;
+    font-weight: 600;
+}
+.doc-details-excerpt .doc-related-article ul{
+    margin: 0;
+}
+.doc-details-excerpt .doc-related-article ul li a{
+    color: #5F6275;
+    font-size: 14px;
+}
+
+.doc-details-excerpt .doc-comments{
+    border: 1px solid #EAEBEF;
+    padding: 30px;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+.doc-details-excerpt .doc-comments h3{
+    font-size: 20px;
+    color: #272B41;
+    font-weight: 600;
+}
+.doc-details-excerpt .doc-comments form{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+.doc-details-excerpt .doc-comments form .form-group{
+    flex: 0 0 50%;
+    padding: 10px;
+    margin: 0;
+}
+.doc-details-excerpt .doc-comments form .form-group:last-child{
+    flex: 0 0 100%;
+}
