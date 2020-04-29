@@ -10,7 +10,6 @@ $all_cats = get_terms( [
 ] );
 
 if( !empty( $all_cats ) ) {
-
     foreach ( $all_cats as $child_cat) {
 
         $options = array(

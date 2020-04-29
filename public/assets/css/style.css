@@ -1,0 +1,77 @@
+.docs-search{
+    background: #F8F8F8;
+    padding: 38px 0;
+    margin-bottom: 60px;
+}
+.docs-search form{
+    box-shadow: 0 10px 15px rgba(146,153,184,0.15);
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+}
+.docs-search form input{
+    border: 0 none;
+    background: #fff;
+    border-radius: 4px 0 0 4px;
+}
+.docs-search form button{
+    height: 45px;
+    border-radius: 0 4px 4px 0;
+}
+.docs-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+.docs-wrapper .docs-sidebar{
+    flex: 0 0 30%;
+}
+.docs-wrapper .docs-sidebar ul li{
+    margin-bottom: 10px;
+    color: #92949F;
+    font-weight: 600;
+}
+.docs-wrapper .docs-sidebar ul li:last-child{
+    margin-bottom: 0;
+}
+.docs-wrapper .docs-contents{
+    flex: 0 0 70%;
+}
+.docs-wrapper .docs-contents .atbd-docs-name{
+    margin-bottom: 50px;
+}
+.docs-wrapper .docs-contents .atbd-docs-name:last-child{
+    margin-bottom: 0;
+}
+.docs-wrapper .docs-contents .atbd-docs-name h4{
+    margin-bottom: 20px;
+}
+.docs-wrapper .docs-contents .atbd-docs-name ul{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -30px;
+}
+.docs-wrapper .docs-contents .atbd-docs-name ul li{
+    flex: 0 0 50%;
+    margin-bottom: 10px;
+    padding: 0 30px;
+}
+
+.docs-wrapper .docs-contents .atbd-docs-name ul li a{
+    color: #5F6275;
+    position: relative;
+    padding-left: 20px;
+    display: block;
+}
+.docs-wrapper .docs-contents .atbd-docs-name ul li a:before{
+    position: absolute;
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: #5458EE;
+    left: 0;
+    top: 9px;
+}
+.docs-wrapper .docs-contents .atbd-docs-name ul li a:hover{
+    color: #5458EE;
+}
