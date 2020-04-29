@@ -55,8 +55,12 @@ $all_cats = get_terms( [
         </div>
         <div class="doc-details-excerpt">
             <p class="doc-last-update">
-                Last Updated:
-                <span>June 7, 2020</span>
+                <?php _e('Last Updated:', 'wpwax-docs');?>
+                <span>
+                    <?php
+                    echo get_the_modified_time('F jS, Y');
+                    ?>
+                </span>
             </p>
 
             <div class="doc-feedback">
@@ -76,7 +80,7 @@ $all_cats = get_terms( [
                 </p>
             </div>
 
-            <div class="doc-pagination">
+            <!--<div class="doc-pagination">
                 <a href="" class="doc-prev">
                     <span><i class="la la-angle-left"></i> Previous Article</span>
                     Stop getting emails from lorem
@@ -85,17 +89,42 @@ $all_cats = get_terms( [
                     <span>Next Article <i class="la la-angle-right"></i></span>
                     Use threads to organize disdcussions
                 </a>
-            </div>
+            </div>-->
+            <?php
+            $wpwax_cats = get_the_terms($post, ATBDP_CATEGORY);
+            $wpwax_cats_ids = array();
 
+            if (!empty($wpwax_cats)) {
+                foreach ($wpwax_cats as $wpwax_cat) {
+                    $wpwax_cats_ids[] = $wpwax_cat->term_id;
+                }
+            }
+            $args = array(
+                'post_type' => 'wpwax_docs',
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'wpwax_docs_category',
+                        'field' => 'term_id',
+                        'terms' => $wpwax_cats_ids,
+                    ),
+                ),
+                'posts_per_page' => 3,
+                'post__not_in' => array($post->ID),
+            );
+            $related_docs = new WP_Query($args);
+            ?>
+            <?php if($related_docs->have_posts()) { ?>
             <div class="doc-related-article">
                 <h3>Related Article</h3>
                 <ul>
-                    <li><a href=""><span class="la la-file-text"></span> Installing lorem multi vendor marketplace</a></li>
-                    <li><a href=""><span class="la la-file-text"></span> Copyright and trademarks</a></li>
-                    <li><a href=""><span class="la la-file-text"></span> Stop getting emails from lorem</a></li>
+                    <?php while($related_docs->have_posts()) : $related_docs->the_post();?>
+                    <li><a href="<?php echo get_the_permalink(); ?>"><span class="la la-file-text"></span> <?php echo get_the_title(); ?></a></li>
+                   <?php endwhile;
+                   wp_reset_postdata();
+                   ?>
                 </ul>
             </div>
-
+            <?php } ?>
             <div class="doc-comments">
                 <h3>Leave Comment</h3>
                 <form action="/">

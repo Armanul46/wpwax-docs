@@ -4,7 +4,7 @@ if (!empty($child_cats)) { ?>
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form action="http://directoristp.com/doc-search-result/">
+                    <form action="http://directorist.local/search-result-2/">
                         <input type="text" placeholder="Search anything" name="search_docs"/>
                         <button type="submit">Search</button>
                     </form>
