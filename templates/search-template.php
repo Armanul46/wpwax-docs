@@ -13,6 +13,9 @@
             <div class="search-result-docs">
             <?php while ($docs->have_posts()) : $docs->the_post(); ?>
                 <h4><a href="<?php echo get_the_permalink(); ?>"> <?php echo get_the_title(); ?> </a></h4>
+                <p>
+                    <?php echo wp_trim_words(get_the_content(),20);?>
+                </p>
             <?php endwhile; ?>
             </div>
         <?php
