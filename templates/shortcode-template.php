@@ -31,6 +31,8 @@ if (!empty($child_cats)) { ?>
                             $options = array(
                                 'post_type' => 'wpwax_docs',
                                 'posts_per_page' => -1,
+                                'orderby'=>'date',
+                                'order'=>'ASC',
                                 'tax_query' => array(
                                     array(
                                         'taxonomy' => 'wpwax_docs_category',
@@ -45,8 +47,10 @@ if (!empty($child_cats)) { ?>
                                 <h4><?php echo $child_cat->name; ?></h4>
                                 <?php if ($docs->have_posts()) { ?>
                                     <ul>
-                                        <?php while ($docs->have_posts()) : $docs->the_post(); ?>
-                                            <li>
+                                        <?php while ($docs->have_posts()) : $docs->the_post();
+                                            $parent_id = wp_get_post_parent_id(get_the_ID());
+                                        ?>
+                                            <li class="<?php echo !empty($parent_id) ? 'child_docs' : 'parent_docs'; ?>">
                                                 <a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a>
                                             </li>
                                         <?php endwhile; ?>
