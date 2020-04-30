@@ -17,6 +17,15 @@
                 $(e).addClass("atbd-docs-flex");
             }
         });
+
+        $(".sidbar-category a").on("click", function(){
+            var $this = $(this);
+            $(""+$this.attr("href")+"").addClass("active");
+            setTimeout(function () {
+                $(""+$this.attr("href")+"").removeClass("active");
+            },3000)
+        })
+
     });
 })(jQuery);
 
