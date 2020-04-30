@@ -2,9 +2,9 @@
 /**
  * Plugin Name: wpWax Docs
  * Plugin URI:
- * Description: This is an add-on for Directorist Plugin. You can display business hour by this extension.
+ * Description: This is docs Plugin.
  * Version: 1.0
- * Author: AazzTech
+ * Author: wpWax
  * Author URI: http://aazztech.com
  * License: GPLv2 or later
  * Text Domain: wpWax-docs
