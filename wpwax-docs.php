@@ -194,7 +194,7 @@ final class BD_Docs
 
     public function load_needed_scripts()
     {
-        wp_enqueue_script('bdc-main-js', plugin_dir_url(__FILE__) . '/public/assets/js/main.js');
+        wp_enqueue_script('bdc-main-js', plugin_dir_url(__FILE__) . '/public/assets/js/main.js',array('jquery'));
         wp_enqueue_style('bdc-main-css', plugin_dir_url(__FILE__) . '/public/assets/css/style.css');
 
     }

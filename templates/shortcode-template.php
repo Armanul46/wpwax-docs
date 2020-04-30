@@ -20,7 +20,7 @@ if (!empty($child_cats)) { ?>
                         <ul>
                             <?php
                             foreach ($child_cats as $child_cat) { ?>
-                                <li class="sidbar-category"><?php echo $child_cat->name; ?></li>
+                                <li class="sidbar-category"><a href="#<?php echo $child_cat->term_id; ?>"><?php echo $child_cat->name; ?></a></li>
                                 <?php
                             } ?>
                         </ul>
@@ -41,7 +41,7 @@ if (!empty($child_cats)) { ?>
                             );
                             $docs = new WP_Query($options);
                             ?>
-                            <div class="atbd-docs-name">
+                            <div class="atbd-docs-name" id="<?php echo $child_cat->term_id; ?>">
                                 <h4><?php echo $child_cat->name; ?></h4>
                                 <?php if ($docs->have_posts()) { ?>
                                     <ul>
