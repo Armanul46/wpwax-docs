@@ -86,6 +86,8 @@ final class BD_Docs
         if( !empty( $category ) ) {
             $child_cats = get_terms([
                 'taxonomy' => 'wpwax_docs_category',
+                'orderby' => 'date',
+                'order' => 'ASC',
                 'parent' => $category->term_taxonomy_id
             ]);
         }
