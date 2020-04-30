@@ -122,10 +122,10 @@ final class BD_Docs
             'label' => __('WpWax Docs', 'wpwax-docs'),
             'description' => __('WpWax Docs', 'wpwax-docs'),
             'labels' => $labels,
-            'supports' => array('title', 'editor', 'author'),
+            'supports' => array('title', 'editor', 'author','page-attributes'),
             //'show_in_rest'         => true,
             'taxonomies' => array('wpwax_docs_category'),
-            'hierarchical' => false,
+            'hierarchical' => true,
             'public' => true,
             'show_ui' => current_user_can('edit_others_at_biz_dirs') ? true : false, // show the menu only to the admin
             'show_in_menu' => true,
