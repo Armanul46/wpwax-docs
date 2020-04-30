@@ -11,7 +11,12 @@
                 $(e).addClass("active");
                 $(e).next().slideToggle();
             })
-        })
+        });
+        $(".atbd-docs-name").each(function (i, e) {
+            if($(e).children("ul").children("li").length > 5){
+                $(e).addClass("atbd-docs-flex");
+            }
+        });
     });
 })(jQuery);
 
