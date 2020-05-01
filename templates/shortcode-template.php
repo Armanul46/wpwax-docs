@@ -70,7 +70,6 @@ if (!empty($child_cats)) { ?>
                                     </ul>
                                 <?php } ?>
                             </div>
-
                             <?php
                         }
                         ?>
