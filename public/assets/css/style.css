@@ -103,6 +103,7 @@
     list-style-type: decimal;
     padding: 0;
     margin-left: 45px;
+    margin-bottom: 0;
 }
 .docs-wrapper .docs-contents .atbd-docs-name .child_docs a{
     padding-left: 0;
