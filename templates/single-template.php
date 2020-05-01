@@ -1,5 +1,7 @@
 <?php
 global $post;
+$single_doc_id = $post->ID;
+
 $cats = get_the_terms($post->ID, 'wpwax_docs_category');
 $parent_id = $cats[0]->parent;
 
@@ -29,8 +31,8 @@ $all_cats = get_terms( [
                     <h4 class="<?php echo ($cats[0]->term_id == $child_cat->term_id ) ? 'active' : ''; ?>"><?php echo $child_cat->name; ?></h4>
                     <?php if($docs->have_posts()) {?>
                         <ul>
-                            <?php while ($docs->have_posts()) : $docs->the_post(); ?>
-                                <li><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></li>
+                            <?php while ( $docs->have_posts() ) : $docs->the_post(); ?>
+                                <li class="<?php echo ( $single_doc_id === get_the_ID() ) ? 'active' : ''; ?>"><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></li>
                             <?php endwhile; ?>
                         </ul>
                     <?php } ?>
