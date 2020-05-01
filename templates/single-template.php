@@ -9,6 +9,8 @@ $all_cats = get_terms( [
 ] ); ?>
 <div class="wpwax-single-docs">
     <div class="wpwax-left-sidebar">
+        <div class="wpwax-left-sidebar-contents">
+            <h2>Directorist</h2>
         <?php
 
         if( !empty( $all_cats ) ) {
@@ -40,6 +42,7 @@ $all_cats = get_terms( [
             wp_reset_postdata();
         }
         ?>
+        </div>
     </div>
     <section class="wpwax-doc-details">
         <?php

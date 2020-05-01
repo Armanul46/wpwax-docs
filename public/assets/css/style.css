@@ -33,6 +33,14 @@
 .docs-wrapper .docs-sidebar ul li:last-child{
     margin-bottom: 0;
 }
+.docs-wrapper .docs-sidebar ul li a{
+    color: #92949F;
+    transition: 0.3s ease;
+}
+.docs-wrapper .docs-sidebar ul li a:hover{
+    color: #5458EE;
+    text-decoration: underline;
+}
 .docs-wrapper .docs-contents{
     flex: 0 0 70%;
 }
@@ -94,7 +102,7 @@
     margin-bottom: 18px;
 }
 .wpwax-single-docs .left-sidebar h4{
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     font-size: 15px;
     font-weight: 600;
     position: relative;
@@ -116,7 +124,8 @@
     margin: 0 0 0 20px;
 }
 .wpwax-single-docs .left-sidebar ul li{
-    margin-bottom: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 .wpwax-single-docs .left-sidebar ul li:last-child{
     margin-bottom: 0;
@@ -130,6 +139,8 @@
 .wpwax-single-docs .left-sidebar ul li a:hover{
     color: #5458EE;
 }
+.wpwax-single-docs
+
 .wpwax-left-sidebar{
     flex: 0 0 35%;
     padding: 0 30px;
@@ -306,4 +317,67 @@
 }
 .wpwax-search-result .search-result-docs div h4 a:hover{
     color: #006FFF;
+}
+.wpwax-search-result .docs-search{
+    background: #272b40;
+}
+.wpwax-search-result .docs-search form input{
+    height: 50px;
+    padding-left: 45px;
+    border-radius: 4px;
+}
+.wpwax-search-result .docs-search form span{
+    position: absolute;
+    font-size: 20px;
+    left: 30px;
+    display: block;
+    color: #b0b0b1;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.doc-cta{
+    background: #F8F8F8;
+    padding: 100px 0;
+    margin-top: 80px;
+}
+.doc-cta h2{
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.single-doc-area{
+    background: none !important;
+}
+.single-doc-area .single_blog{
+    box-shadow: none !important;
+}
+.wpwax-doc-details .title{
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 38px;
+    color: #272B41;
+    margin-bottom: 50px;
+}
+.wpwax-left-sidebar-contents{
+    box-shadow: 0 0 10px rgba(160,164,180,0.15);
+    border: 1px solid #EAEBEF;
+    border-radius: 4px;
+}
+.wpwax-left-sidebar-contents > h2{
+    font-size: 16px;
+    font-weight: 600 !important;
+    padding: 20px;
+    box-shadow: 0 10px 10px rgba(160,164,180,0.10);
+    background: #fff;
+    border-radius: 4px 4px 0 0;
+}
+.wpwax-left-sidebar-contents .left-sidebar{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.wpwax-left-sidebar-contents .left-sidebar ul{
+    border-left: 2px solid #EAEBEF;
+    padding-left: 20px;
 }

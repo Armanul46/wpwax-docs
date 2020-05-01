@@ -66,5 +66,16 @@ if (!empty($child_cats)) { ?>
             </div>
         </div>
     </div>
+    <div class="doc-cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>Still no luck? We can help!</h2>
+                    <p>Contact us and we’ll get back to you as soon as possible.</p>
+                    <a href="" class="btn btn-primary">Submit a Request</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php
 }

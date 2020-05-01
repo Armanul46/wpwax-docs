@@ -1,4 +1,16 @@
 <div class="wpwax-search-result">
+    <div class="docs-search">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form action="http://directorist.local/search-result-2/">
+                        <input type="text" placeholder="Search anything" name="search_docs"/>
+                        <span class="la la-search"></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!--ends: .docs-search-->
     <div class="container">
         <div class="row">
             <?php
@@ -25,7 +37,7 @@
                     <div class="doc-result-wrapper">
                         <?php while ($docs->have_posts()) : $docs->the_post(); ?>
                             <div class="search-result-docs">
-                                <span class="la la-file-o"></span>
+                                <span class="la la-file-text-o"></span>
                                 <div>
                                     <h4>
                                         <a href="<?php echo get_the_permalink(); ?>"> <?php echo get_the_title(); ?> </a>
