@@ -3,7 +3,9 @@ global $post;
 $single_doc_id = $post->ID;
 
 $cats = get_the_terms($post->ID, 'wpwax_docs_category');
+
 $parent_id = $cats[0]->parent;
+$parent_cat = get_term_by('id', $parent_id, 'wpwax_docs_category');
 
 $all_cats = get_terms( [
     'taxonomy'=> 'wpwax_docs_category',
@@ -12,7 +14,7 @@ $all_cats = get_terms( [
 <div class="wpwax-single-docs">
     <div class="wpwax-left-sidebar">
         <div class="wpwax-left-sidebar-contents">
-            <h2>Directorist</h2>
+            <h2><?php echo !empty( $parent_cat ) ? $parent_cat->name : ''; ?></h2>
         <?php
 
         if( !empty( $all_cats ) ) {

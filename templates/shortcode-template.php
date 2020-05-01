@@ -78,7 +78,7 @@ if (!empty($child_cats)) { ?>
             </div>
         </div>
     </div>
-    <div class="doc-cta">
+    <!--<div class="doc-cta">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
@@ -88,6 +88,6 @@ if (!empty($child_cats)) { ?>
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <?php
 }
