@@ -143,7 +143,7 @@ final class BD_Docs
         $slug = 'wp_wax_dir';
         if (!empty($slug)) {
             $args['rewrite'] = array(
-                'slug' => $slug,
+                'slug' => '/',
                 'with_front' => false,
 
             );
