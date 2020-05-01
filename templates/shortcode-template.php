@@ -31,6 +31,7 @@ if (!empty($child_cats)) { ?>
                             $options = array(
                                 'post_type' => 'wpwax_docs',
                                 'posts_per_page' => -1,
+                                'post_parent' => 0,
                                 'orderby'=>'date',
                                 'order'=>'ASC',
                                 'tax_query' => array(
@@ -50,8 +51,20 @@ if (!empty($child_cats)) { ?>
                                         <?php while ($docs->have_posts()) : $docs->the_post();
                                             $parent_id = wp_get_post_parent_id(get_the_ID());
                                         ?>
-                                            <li class="<?php echo !empty($parent_id) ? 'child_docs' : 'parent_docs'; ?>">
+                                            <li class="parent_docs">
                                                 <a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a>
+                                                <?php
+                                                $child_docs = get_children( array('post_parent' => get_the_ID()) );
+                                                if( !empty($child_docs) ) {
+                                                ?>
+                                                <ul>
+                                                    <?php foreach ( $child_docs as $child_doc ) { ?>
+                                                    <li class="child_docs">
+                                                        <a href="<?php echo get_the_permalink($child_doc->ID); ?>"><?php echo get_the_title($child_doc->ID); ?></a>
+                                                    </li>
+                                                    <?php } ?>
+                                                </ul>
+                                                <?php } ?>
                                             </li>
                                         <?php endwhile; ?>
                                     </ul>
