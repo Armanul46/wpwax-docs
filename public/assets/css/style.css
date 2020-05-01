@@ -92,7 +92,24 @@
 .docs-wrapper .docs-contents .atbd-docs-name ul li a:hover{
     color: #5458EE;
 }
-
+.docs-wrapper .docs-contents .atbd-docs-name ul li ul{
+    padding-left: 21px;
+}
+.docs-wrapper .docs-contents .atbd-docs-name ul li ul li,
+.docs-wrapper .docs-contents .atbd-docs-name.atbd-docs-flex ul li ul li{
+    flex: 0 0 100%;
+}
+.docs-wrapper .docs-contents .atbd-docs-name .child_docs{
+    list-style-type: decimal;
+    padding: 0;
+    margin-left: 45px;
+}
+.docs-wrapper .docs-contents .atbd-docs-name .child_docs a{
+    padding-left: 0;
+}
+.docs-wrapper .docs-contents .atbd-docs-name .child_docs a:before{
+    content: none;
+}
 .wpwax-single-docs{
     display: flex;
     flex-wrap: wrap;
@@ -377,7 +394,22 @@
     padding-left: 20px;
     padding-right: 20px;
 }
-.wpwax-left-sidebar-contents .left-sidebar ul{
-    border-left: 2px solid #EAEBEF;
+.wpwax-left-sidebar-contents .left-sidebar ul li{
+    position: relative;
     padding-left: 20px;
+}
+.wpwax-left-sidebar-contents .left-sidebar ul li:before{
+    position: absolute;
+    content: '';
+    width: 2px;
+    background: #EAEBEF;
+    height: 100%;
+    left: 0;
+    top:0;
+}
+.wpwax-left-sidebar-contents .left-sidebar ul li.active:before{
+    background: #006FFF;
+}
+.wpwax-left-sidebar-contents .left-sidebar ul li.active a{
+    color: #006FFF;
 }
