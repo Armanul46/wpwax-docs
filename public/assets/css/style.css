@@ -52,6 +52,7 @@
 }
 .docs-wrapper .docs-contents .atbd-docs-name h4{
     margin-bottom: 20px;
+    font-weight: 600;
 }
 .docs-wrapper .docs-contents .atbd-docs-name.active h4{
     background: #fffc00;
@@ -94,6 +95,7 @@
 }
 .docs-wrapper .docs-contents .atbd-docs-name ul li ul{
     padding-left: 21px;
+    padding-top: 5px;
 }
 .docs-wrapper .docs-contents .atbd-docs-name ul li ul li,
 .docs-wrapper .docs-contents .atbd-docs-name.atbd-docs-flex ul li ul li{
