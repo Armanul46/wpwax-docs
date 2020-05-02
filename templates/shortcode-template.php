@@ -17,6 +17,7 @@ if (!empty($child_cats)) { ?>
             <div class="col-md-12">
                 <div class="docs-wrapper">
                     <div class="docs-sidebar">
+                        <div id="sticky-anchor"></div>
                         <ul>
                             <?php
                             foreach ($child_cats as $child_cat) { ?>
