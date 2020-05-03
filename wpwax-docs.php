@@ -53,9 +53,54 @@ final class BD_Docs
             add_shortcode( 'wpwax_search_result', array( self::$instance, 'wpwax_search_result') );
             self::$instance->includes();
 
+            add_action('init', array(self::$instance, 'my_custom_rewrite'));
+            add_filter('post_type_link', array(self::$instance, 'my_custom_permalinks'), 10, 2);
+
+
         }
         return self::$instance;
     }
+
+    /**
+     * @since 1.0
+     * @param string  $post_link The post's permalink.
+     * @param WP_Post $post      The post in question.
+     * @return string $link      The post's permalink.
+     */
+
+   public function my_custom_permalinks( $link, $post ) {
+        if ( $post->post_type == 'wpwax_docs' ){
+            $categories = get_the_terms( $post, 'wpwax_docs_category' );
+            $local_names = array();
+                foreach ($categories as $term) {
+                    $local_names[$term->term_id] = $term->parent == 0 ? $term->slug : $term->slug;
+                    krsort($local_names);
+                    $categories = array_reverse($local_names);
+                }
+            $output = array();
+            if($categories){
+                foreach ($categories as $category) {
+                    $term = get_term_by('slug', $category, 'wpwax_docs_category');
+                    $output[] = "$term->slug";
+                }
+            }
+            $outputs = join('/', $output);
+            $slug = home_url( "/$outputs/" . $post->post_name . "/"  );
+            //@todo find any better way to pass categories in init or any early hooks
+            $slug = add_query_arg('ref', $outputs, $slug);
+            return $slug;
+        } else {
+            return $link;
+        }
+    }
+    // add the new rewrite rules to the echo system
+    public function my_custom_rewrite() {
+        $custom_slug = isset($_GET['ref']) ? esc_attr($_GET['ref']) : '';
+        if($custom_slug){
+            add_rewrite_rule("$custom_slug\/(.*)", 'index.php?wpwax_docs=$matches[1]', 'top');
+        }
+     }
+
 
     public function wpwax_search_result () {
 
@@ -132,25 +177,17 @@ final class BD_Docs
             'menu_position' => 20,
             'show_in_admin_bar' => true,
             'show_in_nav_menus' => true,
+            'menu_icon' => 'dashicons-welcome-learn-more',
             'can_export' => true,
             'has_archive' => false,
             'exclude_from_search' => false,
             'publicly_queryable' => true,
+            'rewrite' =>  array( 'with_front' => false, ),
             'capability_type' => 'post',
             'map_meta_cap' => true, // set this true, otherwise, even admin will not be able to edit this post. WordPress will map cap from edit_post to edit_at_biz_dir etc,
 
         );
-        $slug = 'wp_wax_dir';
-        if (!empty($slug)) {
-            $args['rewrite'] = array(
-                'slug' => '/',
-                'with_front' => false,
-
-            );
-        }
-
-
-
+      
         register_post_type('wpwax_docs', $args);
 
     }
@@ -185,10 +222,6 @@ final class BD_Docs
         );
 
         // get the rewrite slug from the user settings, if exist use it.
-
-
-
-
 
         register_taxonomy('wpwax_docs_category', 'wpwax_docs', $args);
 
@@ -303,6 +336,4 @@ function BD_Docs()
     return BD_Docs::instance();
 }
 BD_Docs(); // get the plugin running
-
-
 
