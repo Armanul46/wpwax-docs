@@ -71,7 +71,8 @@ final class BD_Docs
    public function my_custom_permalinks( $link, $post ) {
         if ( $post->post_type == 'wpwax_docs' ){
             $categories = get_the_terms( $post, 'wpwax_docs_category' );
-            $local_names = array();
+            if($categories){
+                $local_names = array();
                 foreach ($categories as $term) {
                     $local_names[$term->term_id] = $term->parent == 0 ? $term->slug : $term->slug;
                     krsort($local_names);
@@ -89,6 +90,9 @@ final class BD_Docs
             //@todo find any better way to pass categories in init or any early hooks
             $slug = add_query_arg('ref', $outputs, $slug);
             return $slug;
+            }else{
+                return $link;
+            }
         } else {
             return $link;
         }
