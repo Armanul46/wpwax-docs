@@ -13,9 +13,10 @@
     border: 0 none;
     background: #fff;
     border-radius: 4px 0 0 4px;
+    height: 50px;
 }
 .docs-search form button{
-    height: 45px;
+    height: 50px;
     border-radius: 0 4px 4px 0;
 }
 .docs-wrapper{
@@ -175,6 +176,13 @@
 .wpwax-doc-details{
     flex: 0 0 65%;
     padding: 0 30px;
+    line-height: 27px;
+}
+.wpwax-doc-details p{
+    line-height: 27px;
+}
+.wpwax-doc-details b{
+    color: #272B41;
 }
 .doc-details-excerpt{
     margin-top: 60px;
@@ -280,7 +288,7 @@
 }
 .doc-details-excerpt .doc-related-article ul li a{
     color: #5F6275;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .doc-details-excerpt .doc-comments{

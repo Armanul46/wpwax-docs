@@ -2,7 +2,7 @@
     <div class="docs-search">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 offset-md-2">
+                <div class="col-md-6 offset-md-3">
                     <form action="http://directorist.local/search-result-2/">
                         <input type="text" placeholder="Search anything" name="search_docs"/>
                         <span class="la la-search"></span>
