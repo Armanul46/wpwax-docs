@@ -9,7 +9,9 @@ $parent_cat = get_term_by('id', $parent_id, 'wpwax_docs_category');
 
 $all_cats = get_terms( [
     'taxonomy'=> 'wpwax_docs_category',
-    'parent'  => $parent_id
+    'parent'  => $parent_id,
+    'orderby'   => 'id',
+    'order'   => 'ASC',
 ] ); ?>
 <div class="wpwax-single-docs">
     <div class="wpwax-left-sidebar">
