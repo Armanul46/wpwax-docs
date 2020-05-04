@@ -53,8 +53,8 @@ final class BD_Docs
             add_shortcode( 'wpwax_search_result', array( self::$instance, 'wpwax_search_result') );
             self::$instance->includes();
 
-            add_action('init', array(self::$instance, 'my_custom_rewrite'));
-            add_filter('post_type_link', array(self::$instance, 'my_custom_permalinks'), 10, 2);
+           // add_action('init', array(self::$instance, 'my_custom_rewrite'));
+           add_filter('post_type_link', array(self::$instance, 'my_custom_permalinks'), 10, 2);
 
 
         }
@@ -82,11 +82,18 @@ final class BD_Docs
             if($categories){
                 foreach ($categories as $category) {
                     $term = get_term_by('slug', $category, 'wpwax_docs_category');
-                    $output[] = "$term->slug";
+                    $output[] = $term->slug;
                 }
             }
+            $child_slug = '';
+            if($post->post_parent){
+                $parent_id = get_post_field( 'post_parent', $post->ID );
+                $parent_slug = get_post_field( 'post_name', $parent_id );
+                $child_slug = $parent_slug. '/' .$post->post_name;
+            }
+            $post_slug = $child_slug ? $child_slug : $post->post_name;
             $outputs = join('/', $output);
-            $slug = home_url( "/$outputs/" . $post->post_name . "/"  );
+            $slug = home_url( "/$outputs/" . $post_slug . "/"  );
             //@todo find any better way to pass categories in init or any early hooks
             $slug = add_query_arg('ref', $outputs, $slug);
             return $slug;
