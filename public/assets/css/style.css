@@ -28,7 +28,7 @@
 }
 .docs-sidebar ul.stick {
     position: fixed;
-    top: 0;
+    top: 65px;
     z-index: 10000;
 }
 .docs-wrapper .docs-sidebar ul li{
@@ -42,6 +42,7 @@
 .docs-wrapper .docs-sidebar ul li a{
     color: #92949F;
     transition: 0.3s ease;
+    font-size: 17px;
 }
 .docs-wrapper .docs-sidebar ul li a:hover,
 .docs-wrapper .docs-sidebar ul li a.active{
@@ -61,6 +62,7 @@
 .docs-wrapper .docs-contents .atbd-docs-name h4{
     margin-bottom: 20px;
     font-weight: 600;
+    font-size: 24px;
 }
 .docs-wrapper .docs-contents .atbd-docs-name.active h4{
     background: #fffc00;
