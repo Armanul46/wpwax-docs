@@ -322,7 +322,7 @@ final class BD_Docs
         if ( ! defined( 'BDC_FILE' ) ) { define( 'BDC_FILE', __FILE__ ); }
         if ( ! defined( 'BDC_BASE' ) ) { define( 'BDC_BASE', plugin_basename( __FILE__ ) ); }
         // Plugin Text domain File.
-        if ( ! defined( 'BDC_TEXTDOMAIN' ) ) { define( 'BDC_TEXTDOMAIN', 'directorist-map-view' ); }
+        if ( ! defined( 'BDC_TEXTDOMAIN' ) ) { define( 'BDC_TEXTDOMAIN', 'wpwax-docs' ); }
         // Plugin Language File Path
         if ( !defined('BDC_LANG_DIR') ) { define('BDC_LANG_DIR', dirname(plugin_basename( __FILE__ ) ) . '/languages'); }
         // Plugin Template Path
