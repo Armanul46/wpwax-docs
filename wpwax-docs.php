@@ -183,7 +183,7 @@ final class BD_Docs
             'taxonomies' => array('wpwax_docs_category'),
             'hierarchical' => true,
             'public' => true,
-            'show_ui' => current_user_can('edit_others_at_biz_dirs') ? true : false, // show the menu only to the admin
+            'show_ui' => true, // show the menu only to the admin
             'show_in_menu' => true,
             'menu_position' => 20,
             'show_in_admin_bar' => true,
