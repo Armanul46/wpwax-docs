@@ -52,69 +52,22 @@ final class BD_Docs
             add_shortcode('wpwax_docs',array(self::$instance, 'wpwax_docs'));
             add_shortcode( 'wpwax_search_result', array( self::$instance, 'wpwax_search_result') );
             self::$instance->includes();
-
-           add_action('init', array(self::$instance, 'wpwax_custom_rewrite'));
-           add_filter('post_type_link', array(self::$instance, 'wpwax_custom_permalinks'), 10, 2);
+            add_filter('post_type_link', array(self::$instance, 'filter_post_type_link'), 10, 2);	
         }
         return self::$instance;
     }
 
-    /**
-     * @since 1.0
-     * @param string  $post_link The post's permalink.
-     * @param WP_Post $post      The post in question.
-     * @return string $link      The post's permalink.
-     */
-
-   public function wpwax_custom_permalinks( $link, $post ) {
-        if ( $post->post_type == 'wpwax_docs' ){
-            $categories = get_the_terms( $post, 'wpwax_docs_category' );
-            if($categories){
-                $local_names = array();
-                foreach ($categories as $term) {
-                    $local_names[$term->term_id] = $term->parent == 0 ? $term->slug : $term->slug;
-                    krsort($local_names);
-                    $categories = array_reverse($local_names);
-                }
-            $output = array();
-            if($categories){
-                foreach ($categories as $category) {
-                    $term = get_term_by('slug', $category, 'wpwax_docs_category');
-                    $output[] = $term->slug;
-                }
-            }
-            $child_slug = '';
-            if($post->post_parent){
-                $parent_id = get_post_field( 'post_parent', $post->ID );
-                $parent_slug = get_post_field( 'post_name', $parent_id );
-                $child_slug = $parent_slug. '/' .$post->post_name;
-            }
-            $post_slug = $child_slug ? $child_slug : $post->post_name;
-            $outputs = join('/', $output);
-            $slug = home_url( "/$outputs/" . $post_slug . "/"  );
-            //@todo find any better way to pass categories in init or any early hooks
-            $slug = add_query_arg('ref', $outputs, $slug);
-            return $slug;
-            }else{
-                return $link;
-            }
-        } else {
-            return $link;
-        }
+   public function filter_post_type_link($link, $post){
+      
+    if ($post->post_type != 'wpwax_docs'){
+        return $link; 
     }
-    // add the new rewrite rules to the echo system
-    public function wpwax_custom_rewrite() {
-        var_dump(get_search_link('dfdsf'));
-        $custom_slug = isset($_GET['ref']) ? esc_attr($_GET['ref']) : '';
-        if($custom_slug){
-            add_rewrite_rule(
-                '^'.$custom_slug.'/([^/]*)/?$',
-                'index.php?ref='.$custom_slug.'&wpwax_docs=$matches[1]',
-                'top'
-                );
-        }
-     }
+    if ($cats = get_the_terms($post->ID, 'wpwax_docs_category')){
+        $link = str_replace('%wpwax_docs_category%', ($cats[0])->slug, $link); 
+    }
+    return $link;
 
+    }
 
     public function wpwax_search_result () {
 
@@ -145,7 +98,7 @@ final class BD_Docs
         if( !empty( $category ) ) {
             $child_cats = get_terms([
                 'taxonomy' => 'wpwax_docs_category',
-                'orderby' => 'id',
+                'orderby' => 'date',
                 'order' => 'ASC',
                 'parent' => $category->term_taxonomy_id
             ]);
@@ -186,7 +139,7 @@ final class BD_Docs
             'taxonomies' => array('wpwax_docs_category'),
             'hierarchical' => true,
             'public' => true,
-            'show_ui' => true, // show the menu only to the admin
+            'show_ui' => current_user_can('edit_others_at_biz_dirs') ? true : false, // show the menu only to the admin
             'show_in_menu' => true,
             'menu_position' => 20,
             'show_in_admin_bar' => true,
@@ -196,7 +149,7 @@ final class BD_Docs
             'has_archive' => false,
             'exclude_from_search' => false,
             'publicly_queryable' => true,
-            'rewrite' =>  array( 'with_front' => false, ),
+            'rewrite' => array('slug' => '%wpwax_docs_category%', 'with_front' => false),
             'capability_type' => 'post',
             'map_meta_cap' => true, // set this true, otherwise, even admin will not be able to edit this post. WordPress will map cap from edit_post to edit_at_biz_dir etc,
 
@@ -325,7 +278,7 @@ final class BD_Docs
         if ( ! defined( 'BDC_FILE' ) ) { define( 'BDC_FILE', __FILE__ ); }
         if ( ! defined( 'BDC_BASE' ) ) { define( 'BDC_BASE', plugin_basename( __FILE__ ) ); }
         // Plugin Text domain File.
-        if ( ! defined( 'BDC_TEXTDOMAIN' ) ) { define( 'BDC_TEXTDOMAIN', 'wpwax-docs' ); }
+        if ( ! defined( 'BDC_TEXTDOMAIN' ) ) { define( 'BDC_TEXTDOMAIN', 'directorist-map-view' ); }
         // Plugin Language File Path
         if ( !defined('BDC_LANG_DIR') ) { define('BDC_LANG_DIR', dirname(plugin_basename( __FILE__ ) ) . '/languages'); }
         // Plugin Template Path
