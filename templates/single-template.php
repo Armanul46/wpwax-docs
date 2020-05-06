@@ -24,6 +24,8 @@ $all_cats = get_terms( [
                 $options = array(
                     'post_type' => 'wpwax_docs',
                     'posts_per_page' => -1,
+                    'orderby' => 'date',
+                    'order' => 'ASC',
                     'tax_query' => array(
                         array(
                             'taxonomy' => 'wpwax_docs_category',
