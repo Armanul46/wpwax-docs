@@ -145,7 +145,7 @@ final class BD_Docs
         if( !empty( $category ) ) {
             $child_cats = get_terms([
                 'taxonomy' => 'wpwax_docs_category',
-                'orderby' => 'date',
+                'orderby' => 'id',
                 'order' => 'ASC',
                 'parent' => $category->term_taxonomy_id
             ]);
@@ -186,7 +186,7 @@ final class BD_Docs
             'taxonomies' => array('wpwax_docs_category'),
             'hierarchical' => true,
             'public' => true,
-            'show_ui' => current_user_can('edit_others_at_biz_dirs') ? true : false, // show the menu only to the admin
+            'show_ui' => true, // show the menu only to the admin
             'show_in_menu' => true,
             'menu_position' => 20,
             'show_in_admin_bar' => true,
@@ -325,7 +325,7 @@ final class BD_Docs
         if ( ! defined( 'BDC_FILE' ) ) { define( 'BDC_FILE', __FILE__ ); }
         if ( ! defined( 'BDC_BASE' ) ) { define( 'BDC_BASE', plugin_basename( __FILE__ ) ); }
         // Plugin Text domain File.
-        if ( ! defined( 'BDC_TEXTDOMAIN' ) ) { define( 'BDC_TEXTDOMAIN', 'directorist-map-view' ); }
+        if ( ! defined( 'BDC_TEXTDOMAIN' ) ) { define( 'BDC_TEXTDOMAIN', 'wpwax-docs' ); }
         // Plugin Language File Path
         if ( !defined('BDC_LANG_DIR') ) { define('BDC_LANG_DIR', dirname(plugin_basename( __FILE__ ) ) . '/languages'); }
         // Plugin Template Path
