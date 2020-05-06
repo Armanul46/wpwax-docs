@@ -53,10 +53,8 @@ final class BD_Docs
             add_shortcode( 'wpwax_search_result', array( self::$instance, 'wpwax_search_result') );
             self::$instance->includes();
 
-           // add_action('init', array(self::$instance, 'my_custom_rewrite'));
-           add_filter('post_type_link', array(self::$instance, 'my_custom_permalinks'), 10, 2);
-
-
+           add_action('init', array(self::$instance, 'wpwax_custom_rewrite'));
+           add_filter('post_type_link', array(self::$instance, 'wpwax_custom_permalinks'), 10, 2);
         }
         return self::$instance;
     }
@@ -68,7 +66,7 @@ final class BD_Docs
      * @return string $link      The post's permalink.
      */
 
-   public function my_custom_permalinks( $link, $post ) {
+   public function wpwax_custom_permalinks( $link, $post ) {
         if ( $post->post_type == 'wpwax_docs' ){
             $categories = get_the_terms( $post, 'wpwax_docs_category' );
             if($categories){
@@ -105,10 +103,15 @@ final class BD_Docs
         }
     }
     // add the new rewrite rules to the echo system
-    public function my_custom_rewrite() {
+    public function wpwax_custom_rewrite() {
+        var_dump(get_search_link('dfdsf'));
         $custom_slug = isset($_GET['ref']) ? esc_attr($_GET['ref']) : '';
         if($custom_slug){
-            add_rewrite_rule("$custom_slug\/(.*)", 'index.php?wpwax_docs=$matches[1]', 'top');
+            add_rewrite_rule(
+                '^'.$custom_slug.'/([^/]*)/?$',
+                'index.php?ref='.$custom_slug.'&wpwax_docs=$matches[1]',
+                'top'
+                );
         }
      }
 
