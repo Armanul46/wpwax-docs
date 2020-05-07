@@ -53,20 +53,38 @@ final class BD_Docs
             add_shortcode( 'wpwax_search_result', array( self::$instance, 'wpwax_search_result') );
             self::$instance->includes();
             add_filter('post_type_link', array(self::$instance, 'filter_post_type_link'), 10, 2);	
+
+            add_action('save_post', array(self::$instance, 'default_taxonomy_term'), 100, 2 );
+
+
         }
         return self::$instance;
     }
 
-   public function filter_post_type_link($link, $post){
-      
-    if ($post->post_type != 'wpwax_docs'){
-        return $link; 
-    }
-    if ($cats = get_the_terms($post->ID, 'wpwax_docs_category')){
-        $link = str_replace('%wpwax_docs_category%', ($cats[0])->slug, $link); 
-    }
-    return $link;
 
+    public function default_taxonomy_term( $post_id, $post ){
+        if ( 'publish' === $post->post_status ) {
+            $defaults = array();
+            $taxonomies = get_object_taxonomies( $post->post_type );
+            foreach ( (array) $taxonomies as $taxonomy ) {
+                $terms = wp_get_post_terms( $post_id, $taxonomy );
+                if ( empty($terms) && array_key_exists( $taxonomy, $defaults ) ) {
+                    wp_set_object_terms( $post_id, $defaults[$taxonomy], $taxonomy );
+                }
+            }
+        }
+    }
+
+   public function filter_post_type_link(  $link, $post ){
+      
+            if ( $post->post_type !== 'wpwax_docs' )
+            return $link;
+
+        if ( $cats = get_the_terms($post->ID, 'wpwax_docs_category') )
+            $cat_slug = $cats[0]->slug;
+            $link = str_replace('%wpwax_docs_category%', $cat_slug, $link);
+
+        return $link;
     }
 
     public function wpwax_search_result () {
@@ -146,11 +164,11 @@ final class BD_Docs
             'show_in_nav_menus' => true,
             'menu_icon' => 'dashicons-welcome-learn-more',
             'can_export' => true,
-            'has_archive' => false,
             'exclude_from_search' => false,
             'publicly_queryable' => true,
-            'rewrite' => array('slug' => '%wpwax_docs_category%', 'with_front' => false),
+            'rewrite' => array( 'slug' => 'wpwax_docs/%wpwax_docs_category%', 'with_front' => FALSE ),
             'capability_type' => 'post',
+            'has_archive' => 'wpwax_docs',
             'map_meta_cap' => true, // set this true, otherwise, even admin will not be able to edit this post. WordPress will map cap from edit_post to edit_at_biz_dir etc,
 
         );
@@ -186,6 +204,7 @@ final class BD_Docs
             'query_var' => true,
             'public' => true,
             'show_in_nav_menus' => true,
+            'rewrite' => array( 'slug' => 'wpwax_docs', 'with_front' => false ),
         );
 
         // get the rewrite slug from the user settings, if exist use it.
