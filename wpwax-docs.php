@@ -53,7 +53,6 @@ final class BD_Docs
             add_shortcode( 'wpwax_search_result', array( self::$instance, 'wpwax_search_result') );
             self::$instance->includes();
             add_filter('post_type_link', array(self::$instance, 'filter_post_type_link'), 10, 2);	
-
             add_action('save_post', array(self::$instance, 'default_taxonomy_term'), 100, 2 );
 
 
@@ -129,7 +128,6 @@ final class BD_Docs
 
     public function register_custom_post_type()
     {
-
         $labels = array(
             'name' => _x('WpWax Docs', 'Plural Name of WpWax listing', 'wpwax-docs'),
             'singular_name' => _x('WpWax Docs', 'Singular Name of WpWax listing', 'wpwax-docs'),
