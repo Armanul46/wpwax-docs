@@ -56,6 +56,50 @@ class WP_Wax_Custom_Post
 
         );
 
+        // Extensions custom post type
+        $extensions_labels = array(
+            'name' => _x('Extensions Docs', 'Plural Name of Extensions Docs listing', 'wpwax-docs'),
+            'singular_name' => _x('Extensions Docs', 'Singular Name of Extensions Docs listing', 'wpwax-docs'),
+            'menu_name' => __('Extensions Docs', 'wpwax-docs'),
+            'name_admin_bar' => __('Extensions Docs', 'wpwax-docs'),
+            'parent_item_colon' => __('Parent Docs listing:', 'wpwax-docs'),
+            'all_items' => __('All Docs', 'wpwax-docs'),
+            'add_new_item' => __('Add New Doc', 'wpwax-docs'),
+            'add_new' => __('Add New Doc', 'wpwax-docs'),
+            'new_item' => __('New Doc', 'wpwax-docs'),
+            'edit_item' => __('Edit Doc', 'wpwax-docs'),
+            'update_item' => __('Update Doc', 'wpwax-docs'),
+            'view_item' => __('View Doc', 'wpwax-docs'),
+            'search_items' => __('Search Doc', 'wpwax-docs'),
+            'not_found' => __('No Docs found', 'wpwax-docs'),
+            'not_found_in_trash' => __('Not Doc found in Trash', 'wpwax-docs'),
+        );
+
+        $extensions_args = array(
+            'label' => __('Extensions Docs', 'wpwax-docs'),
+            'description' => __('Extensions Docs', 'wpwax-docs'),
+            'labels' => $extensions_labels,
+            'supports' => array('title', 'editor', 'author','page-attributes'),
+            //'show_in_rest'         => true,
+            'taxonomies' => array('wpwax_extensions_category'),
+            'hierarchical' => true,
+            'public' => true,
+            'show_ui' => true, // show the menu only to the admin
+            'show_in_menu' => true,
+            'menu_position' => 20,
+            'show_in_admin_bar' => true,
+            'show_in_nav_menus' => true,
+            'menu_icon' => 'dashicons-welcome-learn-more',
+            'can_export' => true,
+            'exclude_from_search' => false,
+            'publicly_queryable' => true,
+            'rewrite' => array( 'slug' => 'extensions/%wpwax_extensions_category%', 'with_front' => FALSE ),
+            'capability_type' => 'post',
+            'has_archive' => 'wpwax_extensions',
+            'map_meta_cap' => true, // set this true, otherwise, even admin will not be able to edit this post. WordPress will map cap from edit_post to edit_at_biz_dir etc,
+
+        );
+
         // Dlist custom post type
         $dlist_labels = array(
             'name' => _x('Dlist Docs', 'Plural Name of Dlist Docs listing', 'wpwax-docs'),
@@ -76,8 +120,8 @@ class WP_Wax_Custom_Post
         );
 
         $dlist_args = array(
-            'label' => __('Dlist Docs Docs', 'wpwax-docs'),
-            'description' => __('Dlist Docs Docs', 'wpwax-docs'),
+            'label' => __('Dlist Docs', 'wpwax-docs'),
+            'description' => __('Dlist Docs', 'wpwax-docs'),
             'labels' => $dlist_labels,
             'supports' => array('title', 'editor', 'author','page-attributes'),
             //'show_in_rest'         => true,
@@ -323,6 +367,7 @@ class WP_Wax_Custom_Post
         );
 
         register_post_type('wpwax_directorist', $args);
+        register_post_type('wpwax_extensions', $extensions_args);
         register_post_type('wpwax_dlist', $dlist_args);
         register_post_type('wpwax_direo', $direo_args);
         register_post_type('wpwax_directoria', $directoria_args);
@@ -360,6 +405,32 @@ class WP_Wax_Custom_Post
             'public' => true,
             'show_in_nav_menus' => true,
             'rewrite' => array( 'slug' => 'directorist_category', 'with_front' => false ),
+        );
+
+        // Extensions category
+        $extensions_labels = array(
+            'name' => _x('Extensions Docs categories', 'Category general name', 'wpwax-docs'),
+            'singular_name' => _x('Extensions Docs category', 'Category singular name', 'wpwax-docs'),
+            'search_items' => __('Search category', 'wpwax-docs'),
+            'all_items' => __('All categories', 'wpwax-docs'),
+            'parent_item' => __('Parent category', 'wpwax-docs'),
+            'parent_item_colon' => __('Parent category:', 'wpwax-docs'),
+            'edit_item' => __('Edit category', 'wpwax-docs'),
+            'update_item' => __('Update category', 'wpwax-docs'),
+            'add_new_item' => __('Add New category', 'wpwax-docs'),
+            'new_item_name' => __('New category Name', 'wpwax-docs'),
+            'menu_name' => __('Dlist Docs Categories', 'wpwax-docs'),
+        );
+
+        $extensions_args = array(
+            'hierarchical' => true,
+            'labels' => $extensions_labels,
+            'show_ui' => true,
+            'show_admin_column' => true,
+            'query_var' => true,
+            'public' => true,
+            'show_in_nav_menus' => true,
+            'rewrite' => array( 'slug' => 'extensions_category', 'with_front' => false ),
         );
 
         // Dlist category
@@ -519,6 +590,7 @@ class WP_Wax_Custom_Post
         );
 
         register_taxonomy('wpwax_directorist_category', 'wpwax_directorist', $args);
+        register_taxonomy('wpwax_extensions_category', 'wpwax_extensions', $extensions_args);
         register_taxonomy('wpwax_dlist_category', 'wpwax_dlist', $dlist_args);
         register_taxonomy('wpwax_direo_category', 'wpwax_direo', $direo_args);
         register_taxonomy('wpwax_directoria_category', 'wpwax_directoria', $directoria_args);

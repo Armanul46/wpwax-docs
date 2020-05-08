@@ -159,6 +159,9 @@ final class BD_Docs
         } elseif ( 'wpwax_dlist' == $type ) {
             $taxonomy = 'wpwax_dlist_category';
             $search_type = 'dlist';
+        } elseif ( 'wpwax_extensions' == $type ) {
+            $taxonomy = 'wpwax_extensions_category';
+            $search_type = 'extensions';
         } elseif ( 'wpwax_direo' == $type ) {
             $taxonomy = 'wpwax_direo_category';
             $search_type = 'direo';

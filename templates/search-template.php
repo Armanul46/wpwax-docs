@@ -4,6 +4,8 @@ $type = isset( $_GET['type'] ) ?  $_GET['type'] : 'directorist';
         $post_type = 'wpwax_directorist';
     } elseif ( 'dlist' == $type ) {
         $post_type = 'wpwax_dlist';
+    } elseif ( 'extensions' == $type ) {
+        $post_type = 'wpwax_extensions';
     } elseif ( 'direo' == $type ) {
         $post_type = 'wpwax_direo';
     } elseif ( 'directoria' == $type ) {
