@@ -22,8 +22,8 @@ $type = isset( $_GET['type'] ) ?  $_GET['type'] : 'directorist';
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <form action="http://directorist.local/search-result-2/">
-                        <input type="text" placeholder="Search anything" name="search_docs"/>
-                        <input type="hidden" name="type" value="<?php echo !empty( $search_type ) ? $search_type : 'directorist'; ?>">
+                        <input type="text" placeholder="Search anything" name="search_docs" value="<?php echo !empty( $_GET['search_docs'] ) ? $_GET['search_docs'] : ''; ?>" />
+                        <input type="hidden" name="type" value="<?php echo !empty( $type ) ? $type : 'directorist'; ?>">
                         <span class="la la-search"></span>
                     </form>
                 </div>
