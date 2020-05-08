@@ -81,15 +81,51 @@ final class BD_Docs
         }
     }
 
-   public function filter_post_type_link(  $link, $post ){
-      
-            if ( $post->post_type !== 'wpwax_docs' )
-            return $link;
 
-        if ( $cats = get_the_terms($post->ID, 'wpwax_docs_category') )
+    private function docs_type(){
+          return array('wpwax_directorist','wpwax_dlist','wpwax_direo','wpwax_directoria','wpwax_findbiz','wpwax_dservice','wpwax_drestaurant');
+    }
+
+    private function get_link($post_id, $term, $link){
+        if ( $cats = get_the_terms($post_id, $term) ){
             $cat_slug = $cats[0]->slug;
-            $link = str_replace('%wpwax_docs_category%', $cat_slug, $link);
+            $link = str_replace('%'.$term.'%', $cat_slug, $link);
+        }else{
+            $link = $link;
+        }
+        return $link;
+    }
 
+   public function filter_post_type_link(  $link, $post ){
+            if(!in_array($post->post_type, $this->docs_type())){
+                return $link;
+            }
+            $post_id = $post->ID;
+            foreach($this->docs_type() as $type){
+                switch($type){
+                    case 'wpwax_directorist':
+                        $link = $this->get_link($post_id, 'wpwax_directorist_category', $link);
+                    break;
+                    case 'wpwax_dlist':
+                        $link = $this->get_link($post_id, 'wpwax_dlist_category', $link);
+                    break;
+                    case 'wpwax_direo':
+                        $link = $this->get_link($post_id, 'wpwax_direo_category', $link);
+                    break;
+                    case 'wpwax_directoria':
+                        $link = $this->get_link($post_id, 'wpwax_directoria_category', $link);
+                    break;
+                    case 'wpwax_findbiz':
+                        $link = $this->get_link($post_id, 'wpwax_findbiz_category', $link);
+                    break;
+                    case 'wpwax_dservice':
+                        $link = $this->get_link($post_id, 'wpwax_dservice_category', $link);
+                    break;
+                    case 'wpwax_drestaurant':
+                        $link = $this->get_link($post_id, 'wpwax_drestaurant_category', $link);
+                    break;
+                }
+            }
         return $link;
     }
 
