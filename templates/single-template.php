@@ -1,34 +1,58 @@
 <?php
 global $post;
+$post_type = $post->post_type;
+if( 'wpwax_directorist' == $post_type ) {
+    $taxonomy = 'wpwax_directorist_category';
+    $main_doc = __('Directorist', 'wpwax-docs');
+} elseif ( 'wpwax_dlist' == $post_type) {
+    $taxonomy = 'wpwax_dlist_category';
+    $main_doc = __('Dlist', 'wpwax-docs');
+} elseif ( 'wpwax_direo' == $post_type) {
+    $taxonomy = 'wpwax_direo_category';
+    $main_doc = __('Direo', 'wpwax-docs');
+} elseif ( 'wpwax_directoria' == $post_type) {
+    $taxonomy = 'wpwax_directoria_category';
+    $main_doc = __('Directoria', 'wpwax-docs');
+} elseif ( 'wpwax_findbiz' == $post_type) {
+    $taxonomy = 'wpwax_findbiz_category';
+    $main_doc = __('Findbiz', 'wpwax-docs');
+} elseif ( 'wpwax_dservice' == $post_type) {
+    $taxonomy = 'wpwax_dservice_category';
+    $main_doc = __('Dservice', 'wpwax-docs');
+} elseif ( 'wpwax_drestaurant' == $post_type) {
+    $taxonomy = 'wpwax_drestaurant_category';
+    $main_doc = __('Drestaurant', 'wpwax-docs');
+}
+
 $single_doc_id = $post->ID;
 
-$cats = get_the_terms($post->ID, 'wpwax_docs_category');
+$cats = get_the_terms($post->ID, $taxonomy);
 
 $parent_id = $cats[0]->parent;
 $parent_cat = get_term_by('id', $parent_id, 'wpwax_docs_category');
 
 $all_cats = get_terms( [
-    'taxonomy'=> 'wpwax_docs_category',
-    'parent'  => $parent_id,
+    'taxonomy'=> $taxonomy,
+    //'parent'  => $parent_id,
     'orderby'   => 'id',
     'order'   => 'ASC',
 ] ); ?>
 <div class="wpwax-single-docs">
     <div class="wpwax-left-sidebar">
         <div class="wpwax-left-sidebar-contents">
-            <h2><?php echo !empty( $parent_cat ) ? $parent_cat->name : ''; ?></h2>
+            <h2><?php echo !empty( $main_doc ) ? $main_doc : ''; ?></h2>
         <?php
 
         if( !empty( $all_cats ) ) {
             foreach ( $all_cats as $child_cat) {
                 $options = array(
-                    'post_type' => 'wpwax_docs',
+                    'post_type' => $post_type,
                     'posts_per_page' => -1,
                     'orderby' => 'date',
                     'order' => 'ASC',
                     'tax_query' => array(
                         array(
-                            'taxonomy' => 'wpwax_docs_category',
+                            'taxonomy' => $taxonomy,
                             'field' => 'slug',
                             'terms' => $child_cat->slug
                         )
@@ -100,7 +124,7 @@ $all_cats = get_terms( [
                 </a>
             </div>-->
             <?php
-            $wpwax_cats = get_the_terms($post, 'wpwax_docs_category');
+            $wpwax_cats = get_the_terms($post, $taxonomy);
             $wpwax_cats_ids = array();
 
             if (!empty($wpwax_cats)) {
@@ -109,10 +133,10 @@ $all_cats = get_terms( [
                 }
             }
             $args = array(
-                'post_type' => 'wpwax_docs',
+                'post_type' => $post_type,
                 'tax_query' => array(
                     array(
-                        'taxonomy' => 'wpwax_docs_category',
+                        'taxonomy' => $taxonomy,
                         'field' => 'term_id',
                         'terms' => $wpwax_cats_ids,
                     ),
