@@ -4,6 +4,9 @@ $post_type = $post->post_type;
 if( 'wpwax_directorist' == $post_type ) {
     $taxonomy = 'wpwax_directorist_category';
     $main_doc = __('Directorist', 'wpwax-docs');
+} elseif ( 'wpwax_extensions' == $post_type) {
+    $taxonomy = 'wpwax_extensions_category';
+    $main_doc = __('Extensions', 'wpwax-docs');
 } elseif ( 'wpwax_dlist' == $post_type) {
     $taxonomy = 'wpwax_dlist_category';
     $main_doc = __('Dlist', 'wpwax-docs');
