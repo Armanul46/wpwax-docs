@@ -84,7 +84,7 @@ $all_cats = get_terms( [
         ?>
         <div class="title"> <?php echo get_the_title($post->ID); ?> </div>
         <div class="content">
-            <?php echo $post_content; ?>
+        <?php echo do_shortcode(wpautop($post_content)); ?>
         </div>
         <div class="doc-details-excerpt">
             <p class="doc-last-update">
