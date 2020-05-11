@@ -173,10 +173,12 @@
 
 .wpwax-left-sidebar{
     flex: 0 0 35%;
+    width: 35%;
     padding: 0 30px;
 }
 .wpwax-doc-details{
     flex: 0 0 65%;
+    width: 65%;
     padding: 0 30px;
     line-height: 27px;
 }
