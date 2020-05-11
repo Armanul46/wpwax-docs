@@ -23,6 +23,14 @@ final class BD_Docs
      * @since 1.0
      */
     private static $instance;
+
+    /**
+     * CM_Custom_Field Object.
+     *
+     * @var object|WP_Wax_Custom_Post
+     * @since 1.0
+     */
+    public $custom_post;
     /**
      * Main BD_Docs Instance.
      *
@@ -43,30 +51,82 @@ final class BD_Docs
         if (!isset(self::$instance) && !(self::$instance instanceof BD_Docs)) {
             self::$instance = new BD_Docs;
             self::$instance->setup_constants();
+            self::$instance->includes();
+            self::$instance->custom_post = new WP_Wax_Custom_Post;
             add_action('plugins_loaded', array(self::$instance, 'load_textdomain'));
             add_action('wp_enqueue_scripts', array(self::$instance, 'load_needed_scripts'));
 
-            add_action('init', array(self::$instance, 'register_custom_post_type'));
-            add_action('init', array(self::$instance, 'add_custom_taxonomy'));
             add_filter('the_content', array(self::$instance, 'the_content'), 20);
             add_shortcode('wpwax_docs',array(self::$instance, 'wpwax_docs'));
             add_shortcode( 'wpwax_search_result', array( self::$instance, 'wpwax_search_result') );
-            self::$instance->includes();
             add_filter('post_type_link', array(self::$instance, 'filter_post_type_link'), 10, 2);	
+            add_action('save_post', array(self::$instance, 'default_taxonomy_term'), 100, 2 );
+
+
         }
         return self::$instance;
     }
 
-   public function filter_post_type_link($link, $post){
-      
-    if ($post->post_type != 'wpwax_docs'){
-        return $link; 
-    }
-    if ($cats = get_the_terms($post->ID, 'wpwax_docs_category')){
-        $link = str_replace('%wpwax_docs_category%', ($cats[0])->slug, $link); 
-    }
-    return $link;
 
+    public function default_taxonomy_term( $post_id, $post ){
+        if ( 'publish' === $post->post_status ) {
+            $defaults = array();
+            $taxonomies = get_object_taxonomies( $post->post_type );
+            foreach ( (array) $taxonomies as $taxonomy ) {
+                $terms = wp_get_post_terms( $post_id, $taxonomy );
+                if ( empty($terms) && array_key_exists( $taxonomy, $defaults ) ) {
+                    wp_set_object_terms( $post_id, $defaults[$taxonomy], $taxonomy );
+                }
+            }
+        }
+    }
+
+
+    private function docs_type(){
+          return array('wpwax_directorist','wpwax_dlist','wpwax_direo','wpwax_directoria','wpwax_findbiz','wpwax_dservice','wpwax_drestaurant');
+    }
+
+    private function get_link($post_id, $term, $link){
+        if ( $cats = get_the_terms($post_id, $term) ){
+            $cat_slug = $cats[0]->slug;
+            $link = str_replace('%'.$term.'%', $cat_slug, $link);
+        }else{
+            $link = $link;
+        }
+        return $link;
+    }
+
+   public function filter_post_type_link(  $link, $post ){
+            if(!in_array($post->post_type, $this->docs_type())){
+                return $link;
+            }
+            $post_id = $post->ID;
+            foreach($this->docs_type() as $type){
+                switch($type){
+                    case 'wpwax_directorist':
+                        $link = $this->get_link($post_id, 'wpwax_directorist_category', $link);
+                    break;
+                    case 'wpwax_dlist':
+                        $link = $this->get_link($post_id, 'wpwax_dlist_category', $link);
+                    break;
+                    case 'wpwax_direo':
+                        $link = $this->get_link($post_id, 'wpwax_direo_category', $link);
+                    break;
+                    case 'wpwax_directoria':
+                        $link = $this->get_link($post_id, 'wpwax_directoria_category', $link);
+                    break;
+                    case 'wpwax_findbiz':
+                        $link = $this->get_link($post_id, 'wpwax_findbiz_category', $link);
+                    break;
+                    case 'wpwax_dservice':
+                        $link = $this->get_link($post_id, 'wpwax_dservice_category', $link);
+                    break;
+                    case 'wpwax_drestaurant':
+                        $link = $this->get_link($post_id, 'wpwax_drestaurant_category', $link);
+                    break;
+                }
+            }
+        return $link;
     }
 
     public function wpwax_search_result () {
@@ -77,7 +137,7 @@ final class BD_Docs
 
     }
     public function the_content( $content ) {
-        if (is_singular('wpwax_docs') && in_the_loop() && is_main_query()) {
+        if ( is_singular( array('wpwax_directorist','wpwax_dlist','wpwax_direo','wpwax_directoria','wpwax_findbiz','wpwax_dservice','wpwax_drestaurant') ) && in_the_loop() && is_main_query()) {
             ob_start();
             include BDC_TEMPLATES_DIR . '/single-template.php';
             return ob_get_clean();
@@ -92,15 +152,39 @@ final class BD_Docs
         );
         $atts = shortcode_atts($params, $atts);
 
-        $slug = !empty($atts['type']) ? $atts['type'] : '';
-
-        $category = get_term_by('slug', $slug, 'wpwax_docs_category');
-        if( !empty( $category ) ) {
+        $type = !empty($atts['type']) ? $atts['type'] : '';
+        if( !empty( $type ) && 'wpwax_directorist' == $type ) {
+            $taxonomy = 'wpwax_directorist_category';
+            $search_type = 'directorist';
+        } elseif ( 'wpwax_dlist' == $type ) {
+            $taxonomy = 'wpwax_dlist_category';
+            $search_type = 'dlist';
+        } elseif ( 'wpwax_extensions' == $type ) {
+            $taxonomy = 'wpwax_extensions_category';
+            $search_type = 'extensions';
+        } elseif ( 'wpwax_direo' == $type ) {
+            $taxonomy = 'wpwax_direo_category';
+            $search_type = 'direo';
+        } elseif ( 'wpwax_directoria' == $type ) {
+            $taxonomy = 'wpwax_directoria_category';
+            $search_type = 'directoria';
+        } elseif ( 'wpwax_findbiz' == $type ) {
+            $taxonomy = 'wpwax_findbiz_category';
+            $search_type = 'findbiz';
+        } elseif ( 'wpwax_dservice' == $type ) {
+            $taxonomy = 'wpwax_dservice_category';
+            $search_type = 'dservice';
+        } elseif ( 'wpwax_drestaurant' == $type ) {
+            $taxonomy = 'wpwax_drestaurant_category';
+            $search_type = 'drestaurant';
+        }
+        //$category = get_term_by('slug', $slug, 'wpwax_docs_category');
+        if( !empty( $taxonomy ) ) {
             $child_cats = get_terms([
-                'taxonomy' => 'wpwax_docs_category',
+                'taxonomy' =>  $taxonomy,
                 'orderby' => 'date',
                 'order' => 'ASC',
-                'parent' => $category->term_taxonomy_id
+                //'parent' => $category->term_taxonomy_id
             ]);
         }
         ob_start();
@@ -108,91 +192,6 @@ final class BD_Docs
         return ob_get_clean();
     }
 
-
-    public function register_custom_post_type()
-    {
-
-        $labels = array(
-            'name' => _x('WpWax Docs', 'Plural Name of WpWax listing', 'wpwax-docs'),
-            'singular_name' => _x('WpWax Docs', 'Singular Name of WpWax listing', 'wpwax-docs'),
-            'menu_name' => __('WpWax Docs', 'wpwax-docs'),
-            'name_admin_bar' => __('WpWax Docs', 'wpwax-docs'),
-            'parent_item_colon' => __('Parent Docs listing:', 'wpwax-docs'),
-            'all_items' => __('All Docs', 'wpwax-docs'),
-            'add_new_item' => __('Add New Doc', 'wpwax-docs'),
-            'add_new' => __('Add New Doc', 'wpwax-docs'),
-            'new_item' => __('New Doc', 'wpwax-docs'),
-            'edit_item' => __('Edit Doc', 'wpwax-docs'),
-            'update_item' => __('Update Doc', 'wpwax-docs'),
-            'view_item' => __('View Doc', 'wpwax-docs'),
-            'search_items' => __('Search Doc', 'wpwax-docs'),
-            'not_found' => __('No Docs found', 'wpwax-docs'),
-            'not_found_in_trash' => __('Not Doc found in Trash', 'wpwax-docs'),
-        );
-
-        $args = array(
-            'label' => __('WpWax Docs', 'wpwax-docs'),
-            'description' => __('WpWax Docs', 'wpwax-docs'),
-            'labels' => $labels,
-            'supports' => array('title', 'editor', 'author','page-attributes'),
-            //'show_in_rest'         => true,
-            'taxonomies' => array('wpwax_docs_category'),
-            'hierarchical' => true,
-            'public' => true,
-            'show_ui' => current_user_can('edit_others_at_biz_dirs') ? true : false, // show the menu only to the admin
-            'show_in_menu' => true,
-            'menu_position' => 20,
-            'show_in_admin_bar' => true,
-            'show_in_nav_menus' => true,
-            'menu_icon' => 'dashicons-welcome-learn-more',
-            'can_export' => true,
-            'has_archive' => false,
-            'exclude_from_search' => false,
-            'publicly_queryable' => true,
-            'rewrite' => array('slug' => '%wpwax_docs_category%', 'with_front' => false),
-            'capability_type' => 'post',
-            'map_meta_cap' => true, // set this true, otherwise, even admin will not be able to edit this post. WordPress will map cap from edit_post to edit_at_biz_dir etc,
-
-        );
-      
-        register_post_type('wpwax_docs', $args);
-
-    }
-
-    public function add_custom_taxonomy()
-    {
-
-        /*CATEGORY*/
-
-        $labels = array(
-            'name' => _x('WpWax categories', 'Category general name', 'wpwax-docs'),
-            'singular_name' => _x('WpWax category', 'Category singular name', 'wpwax-docs'),
-            'search_items' => __('Search category', 'wpwax-docs'),
-            'all_items' => __('All categories', 'wpwax-docs'),
-            'parent_item' => __('Parent category', 'wpwax-docs'),
-            'parent_item_colon' => __('Parent category:', 'wpwax-docs'),
-            'edit_item' => __('Edit category', 'wpwax-docs'),
-            'update_item' => __('Update category', 'wpwax-docs'),
-            'add_new_item' => __('Add New category', 'wpwax-docs'),
-            'new_item_name' => __('New category Name', 'wpwax-docs'),
-            'menu_name' => __('WpWax Categories', 'wpwax-docs'),
-        );
-
-        $args = array(
-            'hierarchical' => true,
-            'labels' => $labels,
-            'show_ui' => true,
-            'show_admin_column' => true,
-            'query_var' => true,
-            'public' => true,
-            'show_in_nav_menus' => true,
-        );
-
-        // get the rewrite slug from the user settings, if exist use it.
-
-        register_taxonomy('wpwax_docs_category', 'wpwax_docs', $args);
-
-    }
 
     public function load_needed_scripts()
     {
@@ -248,7 +247,7 @@ final class BD_Docs
      */
     private function includes()
     {
-        //require_once BDC_INC_DIR . 'helper-functions.php';
+        require_once BDC_DIR . '/inc/custom-post.php';
     }
     /**
      * It  loads a template file from the Default template directory.

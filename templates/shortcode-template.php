@@ -1,4 +1,5 @@
 <?php
+
 if (!empty($child_cats)) { ?>
     <div class="docs-search">
         <div class="container">
@@ -6,6 +7,7 @@ if (!empty($child_cats)) { ?>
                 <div class="col-md-6 offset-md-3">
                     <form action="http://directorist.local/search-result-2/">
                         <input type="text" placeholder="Search anything" name="search_docs"/>
+                        <input type="hidden" name="type" value="<?php echo !empty( $search_type ) ? $search_type : 'directorist'; ?>">
                         <button type="submit">Search</button>
                     </form>
                 </div>
@@ -28,16 +30,17 @@ if (!empty($child_cats)) { ?>
                     </div>
                     <div class="docs-contents">
                         <?php
+                      //  var_dump($taxonomy);
                         foreach ($child_cats as $child_cat) {
                             $options = array(
-                                'post_type' => 'wpwax_docs',
+                                'post_type' => $type,
                                 'posts_per_page' => -1,
                                 'post_parent' => 0,
                                 'orderby'=>'date',
                                 'order'=>'ASC',
                                 'tax_query' => array(
                                     array(
-                                        'taxonomy' => 'wpwax_docs_category',
+                                        'taxonomy' => $taxonomy,
                                         'field' => 'slug',
                                         'terms' => $child_cat->slug
                                     )

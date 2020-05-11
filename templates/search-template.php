@@ -1,10 +1,31 @@
+<?php
+$type = isset( $_GET['type'] ) ?  $_GET['type'] : 'directorist';
+    if(  'directorist' == $type ) {
+        $post_type = 'wpwax_directorist';
+    } elseif ( 'dlist' == $type ) {
+        $post_type = 'wpwax_dlist';
+    } elseif ( 'extensions' == $type ) {
+        $post_type = 'wpwax_extensions';
+    } elseif ( 'direo' == $type ) {
+        $post_type = 'wpwax_direo';
+    } elseif ( 'directoria' == $type ) {
+        $post_type = 'wpwax_directoria';
+    } elseif ( 'findbiz' == $type ) {
+        $post_type = 'wpwax_findbiz';
+    } elseif ( 'dservice' == $type ) {
+        $post_type = 'wpwax_dservice';
+    } elseif ( 'drestaurant' == $type ) {
+        $post_type = 'wpwax_drestaurant';
+    }
+?>
 <div class="wpwax-search-result">
     <div class="docs-search">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <form action="http://directorist.local/search-result-2/">
-                        <input type="text" placeholder="Search anything" name="search_docs"/>
+                        <input type="text" placeholder="Search anything" name="search_docs" value="<?php echo !empty( $_GET['search_docs'] ) ? $_GET['search_docs'] : ''; ?>" />
+                        <input type="hidden" name="type" value="<?php echo !empty( $type ) ? $type : 'directorist'; ?>">
                         <span class="la la-search"></span>
                     </form>
                 </div>
@@ -15,7 +36,7 @@
         <div class="row">
             <?php
             $options = array(
-                'post_type' => 'wpwax_docs',
+                'post_type' => $post_type,
                 'posts_per_page' => -1,
             );
             if (isset($_GET['search_docs'])) {
