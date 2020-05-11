@@ -83,7 +83,7 @@ final class BD_Docs
 
 
     private function docs_type(){
-          return array('wpwax_directorist','wpwax_dlist','wpwax_direo','wpwax_directoria','wpwax_findbiz','wpwax_dservice','wpwax_drestaurant');
+          return array('wpwax_directorist','wpwax_extensions','wpwax_dlist','wpwax_direo','wpwax_directoria','wpwax_findbiz','wpwax_dservice','wpwax_drestaurant');
     }
 
     private function get_link($post_id, $term, $link){
@@ -106,6 +106,9 @@ final class BD_Docs
                     case 'wpwax_directorist':
                         $link = $this->get_link($post_id, 'wpwax_directorist_category', $link);
                     break;
+                    case 'wpwax_extensions':
+                        $link = $this->get_link($post_id, 'wpwax_extensions_category', $link);
+                        break;
                     case 'wpwax_dlist':
                         $link = $this->get_link($post_id, 'wpwax_dlist_category', $link);
                     break;
@@ -137,7 +140,7 @@ final class BD_Docs
 
     }
     public function the_content( $content ) {
-        if ( is_singular( array('wpwax_directorist','wpwax_dlist','wpwax_direo','wpwax_directoria','wpwax_findbiz','wpwax_dservice','wpwax_drestaurant') ) && in_the_loop() && is_main_query()) {
+        if ( is_singular( array('wpwax_directorist','wpwax_dlist','wpwax_direo','wpwax_directoria','wpwax_findbiz','wpwax_dservice','wpwax_drestaurant','wpwax_extensions') ) && in_the_loop() && is_main_query()) {
             ob_start();
             include BDC_TEMPLATES_DIR . '/single-template.php';
             return ob_get_clean();
