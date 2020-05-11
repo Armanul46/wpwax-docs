@@ -133,7 +133,7 @@
 }
 .wpwax-single-docs .left-sidebar h4{
     margin-bottom: 15px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     position: relative;
     padding-left: 20px;
@@ -162,7 +162,7 @@
 }
 .wpwax-single-docs .left-sidebar ul li a{
     color: #5F6275;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 24px;
     display: block;
 }
@@ -173,17 +173,16 @@
 
 .wpwax-left-sidebar{
     flex: 0 0 35%;
-    width: 35%;
     padding: 0 30px;
 }
 .wpwax-doc-details{
     flex: 0 0 65%;
-    width: 65%;
     padding: 0 30px;
     line-height: 27px;
 }
 .wpwax-doc-details p{
     line-height: 27px;
+    font-size: 18px;
 }
 .wpwax-doc-details b{
     color: #272B41;
@@ -290,6 +289,9 @@
 .doc-details-excerpt .doc-related-article ul{
     margin: 0;
 }
+.doc-details-excerpt .doc-related-article ul li{
+    list-style: none;
+}
 .doc-details-excerpt .doc-related-article ul li a{
     color: #5F6275;
     font-size: 16px;
@@ -388,6 +390,7 @@
 
 .single-doc-area{
     background: none !important;
+    border-bottom: 1px solid #ebebeb;
 }
 .single-doc-area .single_blog{
     box-shadow: none !important;
@@ -398,6 +401,24 @@
     line-height: 38px;
     color: #272B41;
     margin-bottom: 50px;
+}
+.wpwax-doc-details .content h1{
+    font-size: 30px;
+}
+.wpwax-doc-details .content h2{
+    font-size: 24px;
+}
+.wpwax-doc-details .content h3{
+    font-size: 22px;
+}
+.wpwax-doc-details .content h4{
+    font-size: 20px;
+}
+.wpwax-doc-details .content h5{
+    font-size: 18px;
+}
+.wpwax-doc-details .content h6{
+    font-size: 16px;
 }
 .wpwax-left-sidebar-contents{
     box-shadow: 0 0 10px rgba(160,164,180,0.15);
@@ -434,4 +455,20 @@
 }
 .wpwax-left-sidebar-contents .left-sidebar ul li.active a{
     color: #006FFF;
+}
+.wpwax-doc-details ul li{
+    list-style: disc;
+}
+.wpwax-doc-details .content ul{
+    margin-left: 20px;
+}
+.wpwax-doc-details .content ol{
+    padding-left: 20px;
+}
+
+/* responsive css */
+@media (max-width: 1300px){
+    .docs-sidebar ul.stick{
+        top: 30px;
+    }
 }
