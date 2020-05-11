@@ -46,22 +46,34 @@
             });
         });
 
-        //sticky left sidebar when scroll
-        function sticky_relocate() {
-            var window_top = $(window).scrollTop();
-            if($('#sticky-anchor').length){
-                var div_top = $('#sticky-anchor').offset().top;
+        if($(window).innerWidth() > 480){
+            //sticky left sidebar when scroll
+            function sticky_relocate() {
+                var window_top = $(window).scrollTop();
+                if($('#sticky-anchor').length){
+                    var div_top = $('#sticky-anchor').offset().top;
+                }
+                if (window_top > div_top) {
+                    $('.docs-sidebar ul').addClass('stick');
+                } else {
+                    $('.docs-sidebar ul').removeClass('stick');
+                }
             }
-            if (window_top > div_top) {
-                $('.docs-sidebar ul').addClass('stick');
-            } else {
-                $('.docs-sidebar ul').removeClass('stick');
-            }
+            $(function() {
+                $(window).scroll(function(){
+                    //console.log($(window).scrollTop())
+                    var scrollPosition = $('.footer-area')[0].offsetTop - ($(window).scrollTop() + $(".docs-sidebar ul")[0].clientHeight);
+                    if(scrollPosition < 10) {
+                        $('.docs-sidebar ul').removeClass('stick');
+                    } else {
+                        $('.docs-sidebar ul').addClass('stick');
+                        sticky_relocate();
+                    }
+
+                });
+                sticky_relocate();
+            });
         }
-        $(function() {
-            $(window).scroll(sticky_relocate);
-            sticky_relocate();
-        });
 
     });
 })(jQuery);
