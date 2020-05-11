@@ -395,6 +395,7 @@
 .single-doc-area{
     background: none !important;
     border-bottom: 1px solid #ebebeb;
+    margin-bottom: 37px;
 }
 .single-doc-area .single_blog{
     box-shadow: none !important;
@@ -548,6 +549,11 @@
 }
 .docs-wrapper .docs-sidebar ul{
     max-width: 300px;
+}
+.customize-support .footer-area{
+    margin-top: 40px;
+    padding-top: 37px;
+    border-top: 1px solid #ebebeb;
 }
 
 /* responsive css */
