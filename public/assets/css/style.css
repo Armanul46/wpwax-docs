@@ -424,6 +424,15 @@
 .wpwax-doc-details .content h6{
     font-size: 16px;
 }
+.wpwax-doc-details .content h1,
+.wpwax-doc-details .content h2,
+.wpwax-doc-details .content h3,
+.wpwax-doc-details .content h4,
+.wpwax-doc-details .content h5,
+.wpwax-doc-details .content h6{
+    font-weight: 600;
+}
+
 .wpwax-doc-details .content h1 span{
     color: #272B41 !important;
 }
@@ -441,6 +450,9 @@
 }
 .wpwax-doc-details .content h6 span{
     color: #272B41 !important;
+}
+.wpwax-doc-details .content p{
+    margin-bottom: 30px;
 }
 .wpwax-doc-details .content p strong{
     color: #272B41;
