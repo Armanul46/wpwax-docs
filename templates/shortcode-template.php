@@ -36,7 +36,7 @@ if (!empty($child_cats)) { ?>
                                 'post_type' => $type,
                                 'posts_per_page' => -1,
                                 'post_parent' => 0,
-                                'orderby'=>'date',
+                                'orderby'=>'id',
                                 'order'=>'ASC',
                                 'tax_query' => array(
                                     array(

@@ -185,7 +185,7 @@ final class BD_Docs
         if( !empty( $taxonomy ) ) {
             $child_cats = get_terms([
                 'taxonomy' =>  $taxonomy,
-                'orderby' => 'date',
+                'orderby' => 'id',
                 'order' => 'ASC',
                 //'parent' => $category->term_taxonomy_id
             ]);
