@@ -58,7 +58,7 @@ if (!empty($child_cats)) { ?>
                                             <li class="parent_docs">
                                                 <a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a>
                                                 <?php
-                                                $child_docs = get_children( array('post_parent' => get_the_ID()) );
+                                                $child_docs = get_children( array('post_parent' => get_the_ID() , 'post_type'=> $type) );
                                                 if( !empty($child_docs) ) {
                                                 ?>
                                                 <ul>

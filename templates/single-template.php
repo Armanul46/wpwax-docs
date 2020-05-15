@@ -82,12 +82,13 @@ $all_cats = get_terms( [
     <section class="wpwax-doc-details">
         <?php
         $post_object = get_post($post->ID);
-        $post_content = do_shortcode($post_object->post_content);
-
+        $post_content = $post_object->post_content;
+        $embed = new WP_Embed();
+        $content = $embed->autoembed($post_content);
         ?>
         <div class="title"> <?php echo get_the_title($post->ID); ?> </div>
         <div class="content">
-        <?php echo do_shortcode(wpautop($post_content)); ?>
+        <?php echo do_shortcode(wpautop($content)); ?>
         </div>
         <div class="doc-details-excerpt">
             <p class="doc-last-update">
